@@ -2,6 +2,8 @@ import { createChannel } from '../node_modules/decentraland-builder-scripts/chan
 import { createInventory } from '../node_modules/decentraland-builder-scripts/inventory'
 import Script1 from "../1ab2733f-1782-4521-9eda-6aa8ad684277/src/item"
 import Script2 from "../e7a6c753-ea84-4c8e-bb94-4523407a5d55/src/item"
+import * as utils from '@dcl/ecs-scene-utils'
+import { createCoin } from './coin'
 
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
@@ -172,3 +174,53 @@ script1.spawn(triggerArea, {"enabled":true,"onEnter":[{"entityName":"messageBubb
 script2.spawn(messageBubble, {"text":"Some text","fontSize":20}, createChannel(channelId, messageBubble, channelBus))
 script1.spawn(triggerArea2, {"enabled":true,"onEnter":[{"entityName":"messageBubble2","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble2","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea2, channelBus))
 script2.spawn(messageBubble2, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble2, channelBus))
+
+// adding coing came logic below
+
+// Adding base scene models
+const base = new Entity()
+base.addComponent(new GLTFShape('models/baseLight.glb'))
+engine.addEntity(base)
+
+const platform = new Entity()
+platform.addComponent(new GLTFShape('models/platform.glb'))
+platform.addComponent(new Transform())
+engine.addEntity(platform)
+
+const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Includes the spinning animation
+
+
+// Contains the positions for each coin
+const coinPositions = [
+  new Vector3(2.2, 1.5, 2.2),
+  new Vector3(5.2, 1.5, 2.2),
+  new Vector3(8, 1.5, 2.2),
+  new Vector3(10.8, 1.5, 2.2),
+  new Vector3(13.8, 1.5, 2.2),
+  new Vector3(13.8, 2.18, 5),
+  new Vector3(13.8, 2.8, 8),
+  new Vector3(10.8, 2.8, 8),
+  new Vector3(8, 2.8, 8),
+  new Vector3(5.2, 2.8, 8),
+  new Vector3(2.2, 2.8, 8),
+  new Vector3(2.2, 3.4, 10.9),
+  new Vector3(2.2, 3.9, 13.8),
+  new Vector3(5.2, 3.9, 13.8),
+  new Vector3(8, 3.9, 13.8),
+  new Vector3(10.8, 3.9, 13.8),
+  new Vector3(13.8, 3.9, 13.8),
+]
+
+const triggerBoxShape = new utils.TriggerBoxShape(
+  new Vector3(1.5, 3, 1.5),
+  new Vector3(0, 1, 0)
+) // Trigger shape for coin
+
+// Setup the coins
+for (const coinPosition of coinPositions) {
+  createCoin(
+    coinShape,
+    new Transform({ position: coinPosition }),
+    triggerBoxShape
+  )
+}
