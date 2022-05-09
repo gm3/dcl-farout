@@ -7,4 +7,6 @@ Decentraland build for Farout Murals
 Downloaded Farhout Scene "Farout Test 2" from builder, with temp message bubbles for gamification.
 
 ## Thigns To Fix
-Fix colliders on floor
+- [x] Fix colliders on floor
+- [ ] Remove bad geo for coinpick game
+- [ ] move all spray cans to proper locations
