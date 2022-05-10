@@ -4,6 +4,8 @@ import * as utils from '@dcl/ecs-scene-utils'
  * Sound is a separated from the coin entity so that you can
  * still hear it even when the coin is removed from the engine.
  */
+
+ let totalCans: number = 0;
 const coinPickupSound = new Entity()
 coinPickupSound.addComponent(new Transform())
 engine.addEntity(coinPickupSound)
@@ -30,6 +32,9 @@ export function createCoin(
         // Camera enter
         entity.getComponent(Transform).scale.setAll(0)
         coinPickupSound.getComponent(AudioSource).playOnce()
+        totalCans = totalCans + 1
+        console.log(totalCans)
+        // Add to total coins picked up
       },
       onCameraExit: () => {
         // Camera exit
