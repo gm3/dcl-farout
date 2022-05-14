@@ -34,6 +34,12 @@ export function createCoin(
         coinPickupSound.getComponent(AudioSource).playOnce()
         totalCans = totalCans + 1
         console.log(totalCans)
+
+        if (totalCans > 16)
+        {
+        console.log('You won');
+        }
+ 
         // Add to total coins picked up
       },
       onCameraExit: () => {
@@ -44,3 +50,5 @@ export function createCoin(
   )
   return entity
 }
+
+

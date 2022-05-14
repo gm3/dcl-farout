@@ -4,6 +4,9 @@ import Script1 from "../1ab2733f-1782-4521-9eda-6aa8ad684277/src/item"
 import Script2 from "../e7a6c753-ea84-4c8e-bb94-4523407a5d55/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { createCoin } from './coin'
+import { cPuzzlee, createButton } from './game-obj'
+import * as myUI from './ui'
+import { getUserData } from "@decentraland/Identity"
 
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
@@ -14,112 +17,6 @@ const transform = new Transform({
 })
 _scene.addComponentOrReplace(transform)
 
-const entity = new Entity('entity')
-engine.addEntity(entity)
-entity.setParent(_scene)
-const gltfShape = new GLTFShape("c9b17021-765c-4d9a-9966-ce93a9c323d1/FloorBaseGrass_01/FloorBaseGrass_01.glb")
-gltfShape.withCollisions = true
-gltfShape.isPointerBlocker = true
-gltfShape.visible = true
-entity.addComponentOrReplace(gltfShape)
-const transform2 = new Transform({
-  position: new Vector3(8, 0, 8),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity.addComponentOrReplace(transform2)
-
-const entity2 = new Entity('entity2')
-engine.addEntity(entity2)
-entity2.setParent(_scene)
-entity2.addComponentOrReplace(gltfShape)
-const transform3 = new Transform({
-  position: new Vector3(24, 0, 8),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity2.addComponentOrReplace(transform3)
-
-const entity3 = new Entity('entity3')
-engine.addEntity(entity3)
-entity3.setParent(_scene)
-entity3.addComponentOrReplace(gltfShape)
-const transform4 = new Transform({
-  position: new Vector3(40, 0, 8),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity3.addComponentOrReplace(transform4)
-
-const entity4 = new Entity('entity4')
-engine.addEntity(entity4)
-entity4.setParent(_scene)
-entity4.addComponentOrReplace(gltfShape)
-const transform5 = new Transform({
-  position: new Vector3(56, 0, 8),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity4.addComponentOrReplace(transform5)
-
-const entity5 = new Entity('entity5')
-engine.addEntity(entity5)
-entity5.setParent(_scene)
-entity5.addComponentOrReplace(gltfShape)
-const transform6 = new Transform({
-  position: new Vector3(8, 0, 24),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity5.addComponentOrReplace(transform6)
-
-const entity6 = new Entity('entity6')
-engine.addEntity(entity6)
-entity6.setParent(_scene)
-entity6.addComponentOrReplace(gltfShape)
-const transform7 = new Transform({
-  position: new Vector3(24, 0, 24),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity6.addComponentOrReplace(transform7)
-
-const entity7 = new Entity('entity7')
-engine.addEntity(entity7)
-entity7.setParent(_scene)
-entity7.addComponentOrReplace(gltfShape)
-const transform8 = new Transform({
-  position: new Vector3(40, 0, 24),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity7.addComponentOrReplace(transform8)
-
-const entity8 = new Entity('entity8')
-engine.addEntity(entity8)
-entity8.setParent(_scene)
-entity8.addComponentOrReplace(gltfShape)
-const transform9 = new Transform({
-  position: new Vector3(56, 0, 24),
-  rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(1, 1, 1)
-})
-entity8.addComponentOrReplace(transform9)
-
-const faroutTest = new Entity('faroutTest')
-engine.addEntity(faroutTest)
-faroutTest.setParent(_scene)
-const transform10 = new Transform({
-  position: new Vector3(32.261558532714844, 0, 15.707432746887207),
-  rotation: new Quaternion(8.817940676788736e-16, -0.7071068286895752, 8.429369557916289e-8, -0.7071068286895752),
-  scale: new Vector3(1.0000011920928955, 1, 1.0000011920928955)
-})
-faroutTest.addComponentOrReplace(transform10)
-const gltfShape2 = new GLTFShape("db2b1dae-e2f2-431d-9ae7-37e643ed7e73/FAROUT  test4.glb")
-gltfShape2.withCollisions = true
-gltfShape2.isPointerBlocker = true
-gltfShape2.visible = true
-faroutTest.addComponentOrReplace(gltfShape2)
 
 const triggerArea = new Entity('triggerArea')
 engine.addEntity(triggerArea)
@@ -182,33 +79,29 @@ const base = new Entity()
 base.addComponent(new GLTFShape('models/baseLight.glb'))
 engine.addEntity(base)
 
-const platform = new Entity()
-platform.addComponent(new GLTFShape('models/platform.glb'))
-platform.addComponent(new Transform())
-engine.addEntity(platform)
 
-const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Includes the spinning animation
+const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Include the spinning animation
 
 
-// Contains the positions for each coin
+// Contains the positions for each can
 const coinPositions = [
-  new Vector3(2.2, 1.5, 2.2),
-  new Vector3(5.2, 1.5, 2.2),
-  new Vector3(8, 1.5, 2.2),
-  new Vector3(10.8, 1.5, 2.2),
-  new Vector3(13.8, 1.5, 2.2),
-  new Vector3(13.8, 2.18, 5),
-  new Vector3(13.8, 2.8, 8),
-  new Vector3(10.8, 2.8, 8),
-  new Vector3(8, 2.8, 8),
-  new Vector3(5.2, 2.8, 8),
-  new Vector3(2.2, 2.8, 8),
-  new Vector3(2.2, 3.4, 10.9),
-  new Vector3(2.2, 3.9, 13.8),
-  new Vector3(5.2, 3.9, 13.8),
-  new Vector3(8, 3.9, 13.8),
-  new Vector3(10.8, 3.9, 13.8),
-  new Vector3(13.8, 3.9, 13.8),
+  new Vector3(2.2, 1.5, 0),
+  new Vector3(5.2, 1.5, 0),
+  new Vector3(8, 1.5, 0),
+  new Vector3(10, 1.5, 0),
+  new Vector3(12, 1.5, 0),
+  new Vector3(14, 1.5, 0),
+  new Vector3(16 1.5, 0),
+  new Vector3(16 1.5, -2),
+  new Vector3(16 1.5, -4),
+  new Vector3(16 1.5, -6),
+  new Vector3(16 1.5, -8),
+  new Vector3(16 1.5, -10),
+  new Vector3(16 1.5, -12),
+  new Vector3(16 1.5, -14),
+  new Vector3(16 1.5, -16),
+  new Vector3(16 1.5, -18),
+  new Vector3(16 1.5, -20), 
 ]
 
 const triggerBoxShape = new utils.TriggerBoxShape(
@@ -216,7 +109,7 @@ const triggerBoxShape = new utils.TriggerBoxShape(
   new Vector3(0, 1, 0)
 ) // Trigger shape for coin
 
-// Setup the coins
+// Setup the cans
 for (const coinPosition of coinPositions) {
   createCoin(
     coinShape,
@@ -224,3 +117,210 @@ for (const coinPosition of coinPositions) {
     triggerBoxShape
   )
 }
+
+
+
+// start mural game code
+
+myUI.buildUI()
+ 
+executeTask(async () => {
+  //myUI.welcomeMessage();
+  let myPlayer = await getUserData()
+
+  onEnterSceneObservable.add((player) => {
+    myUI.welcomeMessage()
+  })
+
+  onLeaveSceneObservable.add((player) => {
+    // log("player left scene: ", player.userId)
+    // if (player.userId === myPlayer?.userId) {
+    //   log("I left the scene!")
+    // }
+  })
+})
+ 
+if (true) 
+{
+    console.log('This will always executed.');
+}
+
+if (false) {
+    console.log('This will never executed.');
+}   
+
+// farout building main
+const faroutBuilding = new Entity()
+faroutBuilding.addComponent(new GLTFShape('models/FAROUTtest4.glb'))
+faroutBuilding.addComponent(
+  new Transform({
+    position: new Vector3(16.3, 0, -15.3),
+    //scale: new Vector3(1.6, 0.1, 1.6)
+  })
+)
+engine.addEntity(faroutBuilding)
+
+
+//  // ground
+// const floor = new Entity()
+// floor.addComponent(new GLTFShape('models/FloorBaseGrass.glb'))
+// floor.addComponent(
+//   new Transform({
+//     position: new Vector3(8, 0, 8),
+//     scale: new Vector3(1.6, 0.1, 1.6)
+//   })
+// )
+// engine.addEntity(floor)
+
+
+
+
+let puzzle1 = new cPuzzlee(4, 
+  7,
+  new Vector3(10.6, 1.43, -38.76), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(0.98, 1, 1.1), // scale
+  "puzzle1",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2) //plate scale
+); 
+puzzle1.setup()
+
+
+let btn1 = createButton(
+  new Vector3(13, 0.6, -38.79),
+  new Vector3(1.6, 1, 1.6),
+  puzzle1
+)
+
+
+
+
+let puzzle2 = new cPuzzlee(4, 
+  5,
+  new Vector3(10.6, 1.43, -33), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(1.1, 1, 1.1), // scale
+  "puzzle2",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2) //plate scale
+); 
+puzzle2.setup()
+
+let btn2 = createButton(
+  new Vector3(13, 0.8, -33),
+  new Vector3(1.6, 1, 1.6),
+  puzzle2
+) 
+
+
+
+
+
+
+let puzzle3 = new cPuzzlee(4, 
+  6,
+  new Vector3(12.1, 1.45, -28.98), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(.72, 1, .9), // scale
+  "puzzle3",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2) //plate scale
+); 
+puzzle3.setup()
+
+let btn3 = createButton(
+  new Vector3(15.1, 0.6, -28.98),
+  new Vector3(1.6, 1, 1.6),
+  puzzle3
+) 
+
+
+
+let puzzle4 = new cPuzzlee(4, 
+  6,
+  new Vector3(12.1, 1.45, -24.75), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(0.98, 1, .9), // scale
+  "puzzle4",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2) //plate scale
+); 
+puzzle4.setup()
+
+let btn4 = createButton(
+  new Vector3(15.1, 0.6, -24.75),
+  new Vector3(1.6, 1, 1.6),
+  puzzle4
+) 
+
+
+
+
+let puzzle5 = new cPuzzlee(4, 
+  6,
+  new Vector3(12.1, 1.45, -20.2), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(.96, 1, .9), // scale
+  "puzzle5",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2) //plate scale
+); 
+puzzle5.setup()
+let btn5 = createButton(
+  new Vector3(15.1, 0.6, -20.2),
+  new Vector3(1.6, 1, 1.6),
+  puzzle5
+) 
+
+
+
+
+let puzzle6 = new cPuzzlee(3, 
+  6,
+  new Vector3(12.1, 1.6, -12.5), // position
+  Quaternion.Euler(90, 90, 0),//rotation
+  new Vector3(.78, 1, .78), // scale
+  "puzzle6",
+  new Vector3(0, -0.1, -1), //plate position
+  new Vector3(.1, 5.5, 4.2), //plate scale
+  1.3 // distance
+); 
+puzzle6.setup()
+
+let btn6 = createButton(
+  new Vector3(15.1, 0.7, -13.8),
+  new Vector3(1.6, 1, 1.6),
+  puzzle6
+)
+
+
+ 
+
+
+// const button1 = new Entity()
+// button1.addComponent(new GLTFShape('models/button.glb')); 
+// button1.addComponent(
+//   new Transform({
+//     position: new Vector3(13, 0.6, -38.79),
+//     scale: new Vector3(1.6, 1, 1.6)
+//   })
+// )
+
+// // pointer down event
+// button1.addComponent(
+//   new OnPointerDown((_e) => {    
+//     puzzle1.toggle();  
+//     //puzzle3.toggle();   
+//     //puzzle4.toggle(); 
+//   },
+//   {
+//     // button: ActionButton.PRIMARY,
+//     hoverText: "Click to show/hide puzzle",
+//   })
+  
+// )
+// engine.addEntity(button1)
+
+  
+
