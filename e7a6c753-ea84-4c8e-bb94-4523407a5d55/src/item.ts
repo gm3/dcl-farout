@@ -71,7 +71,7 @@ export default class MessageBubble implements IScript<Props> {
     text.hTextAlign = 'center'
     text.value = ''
 
-    // signText.addComponent(text)
+    signText.addComponent(text) // add remove text
 
     signText.addComponent(
       new Transform({

@@ -7,6 +7,7 @@ import { createCoin } from './coin'
 import { cPuzzlee, createButton } from './game-obj'
 import * as myUI from './ui'
 import { getUserData } from "@decentraland/Identity"
+import Script3 from "../b88efbbf-2a9a-47b4-86e1-e38ecc2b433b/src/item"
 
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
@@ -17,14 +18,15 @@ const transform = new Transform({
 })
 _scene.addComponentOrReplace(transform)
 
-
+// Praycan Triggle Box area
 const triggerArea = new Entity('triggerArea')
 engine.addEntity(triggerArea)
 triggerArea.setParent(_scene)
+// triggerArea.addComponent(new BoxShape())
 const transform11 = new Transform({
-  position: new Vector3(3.865518093109131, 0, 16.460861206054688),
+  position: new Vector3(27, 2, -27),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(4.1434831619262695, 4, 16.86838150024414)
+  scale: new Vector3(4, 4, 4)
 })
 triggerArea.addComponentOrReplace(transform11)
 
@@ -32,19 +34,24 @@ const messageBubble = new Entity('messageBubble')
 engine.addEntity(messageBubble)
 messageBubble.setParent(_scene)
 const transform12 = new Transform({
-  position: new Vector3(7.5, 0.49314820766448975, 17.678184509277344),
+  position: new Vector3(30, 2.5, -27),
   rotation: new Quaternion(2.670390586106508e-15, 0.6691974997520447, -7.977454430374564e-8, 0.7430846095085144),
   scale: new Vector3(1.0000007152557373, 1, 1.0000007152557373)
 })
 messageBubble.addComponentOrReplace(transform12)
 
+// end message bubble
+
+
+// 2nd message bubble
 const triggerArea2 = new Entity('triggerArea2')
 engine.addEntity(triggerArea2)
 triggerArea2.setParent(_scene)
+// triggerArea2.addComponent(new BoxShape())
 const transform13 = new Transform({
-  position: new Vector3(21, 1, 3.5),
+  position: new Vector3(22, 2, -3),
   rotation: new Quaternion(0, 0, 0, 1),
-  scale: new Vector3(3.1697640419006348, 6, 4.711836814880371)
+  scale: new Vector3(8, 4, 6)
 })
 triggerArea2.addComponentOrReplace(transform13)
 
@@ -52,11 +59,12 @@ const messageBubble2 = new Entity('messageBubble2')
 engine.addEntity(messageBubble2)
 messageBubble2.setParent(_scene)
 const transform14 = new Transform({
-  position: new Vector3(21.406919479370117, 1.6070034503936768, 2.064754009246826),
-  rotation: new Quaternion(1.6155130754197736e-14, 0.999730110168457, -1.1917709485942396e-7, -0.023234738036990166),
+  position: new Vector3(18, 2, -2),
+  rotation: new Quaternion(0, 0, 0, 1),
   scale: new Vector3(1.0000035762786865, 1, 1.0000035762786865)
 })
 messageBubble2.addComponentOrReplace(transform14)
+// end message bubble
 
 const channelId = Math.random().toString(16).slice(2)
 const channelBus = new MessageBus()
@@ -68,16 +76,16 @@ const script2 = new Script2()
 script1.init(options)
 script2.init(options)
 script1.spawn(triggerArea, {"enabled":true,"onEnter":[{"entityName":"messageBubble","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea, channelBus))
-script2.spawn(messageBubble, {"text":"Some text","fontSize":20}, createChannel(channelId, messageBubble, channelBus))
+script2.spawn(messageBubble, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble, channelBus))
 script1.spawn(triggerArea2, {"enabled":true,"onEnter":[{"entityName":"messageBubble2","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble2","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea2, channelBus))
 script2.spawn(messageBubble2, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble2, channelBus))
 
 // adding coing came logic below
 
 // Adding base scene models
-const base = new Entity()
-base.addComponent(new GLTFShape('models/baseLight.glb'))
-engine.addEntity(base)
+// const base = new Entity()
+// base.addComponent(new GLTFShape('models/baseLight.glb'))
+// engine.addEntity(base)
 
 
 const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Include the spinning animation
@@ -91,17 +99,17 @@ const coinPositions = [
   new Vector3(10, 1.5, 0),
   new Vector3(12, 1.5, 0),
   new Vector3(14, 1.5, 0),
-  new Vector3(16 1.5, 0),
-  new Vector3(16 1.5, -2),
-  new Vector3(16 1.5, -4),
-  new Vector3(16 1.5, -6),
-  new Vector3(16 1.5, -8),
-  new Vector3(16 1.5, -10),
-  new Vector3(16 1.5, -12),
-  new Vector3(16 1.5, -14),
-  new Vector3(16 1.5, -16),
-  new Vector3(16 1.5, -18),
-  new Vector3(16 1.5, -20), 
+  new Vector3(16, 1.5, 0),
+  new Vector3(16, 1.5, -2),
+  new Vector3(16, 1.5, -4),
+  new Vector3(16, 1.5, -6),
+  new Vector3(16, 1.5, -8),
+  new Vector3(16, 1.5, -10),
+  new Vector3(16, 1.5, -12),
+  new Vector3(16, 1.5, -14),
+  new Vector3(16, 1.5, -16),
+  new Vector3(16, 1.5, -18),
+  new Vector3(16, 1.5, -20), 
 ]
 
 const triggerBoxShape = new utils.TriggerBoxShape(
@@ -139,15 +147,7 @@ executeTask(async () => {
     // }
   })
 })
- 
-if (true) 
-{
-    console.log('This will always executed.');
-}
-
-if (false) {
-    console.log('This will never executed.');
-}   
+  
 
 // farout building main
 const faroutBuilding = new Entity()
@@ -294,33 +294,23 @@ let btn6 = createButton(
   puzzle6
 )
 
+//solar punk link
+const externalLink = new Entity('externalLink')
+engine.addEntity(externalLink)
+externalLink.setParent(_scene)
+externalLink.addComponent(new Material)
+externalLink.addComponent(new PlaneShape())
+const transform8 = new Transform({
+  position: new Vector3(11.6, 2, 10),
+  rotation: new Quaternion(270, 0, 270, 1),
+  scale: new Vector3(5 , 5, 1)
+})
+externalLink.addComponentOrReplace(transform8)
 
- 
+const script3 = new Script3()
+script3.spawn(externalLink, {"url":"https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb","name":"SolarPunk Exhibition"}, createChannel(channelId, externalLink, channelBus))
 
 
-// const button1 = new Entity()
-// button1.addComponent(new GLTFShape('models/button.glb')); 
-// button1.addComponent(
-//   new Transform({
-//     position: new Vector3(13, 0.6, -38.79),
-//     scale: new Vector3(1.6, 1, 1.6)
-//   })
-// )
-
-// // pointer down event
-// button1.addComponent(
-//   new OnPointerDown((_e) => {    
-//     puzzle1.toggle();  
-//     //puzzle3.toggle();   
-//     //puzzle4.toggle(); 
-//   },
-//   {
-//     // button: ActionButton.PRIMARY,
-//     hoverText: "Click to show/hide puzzle",
-//   })
-  
-// )
-// engine.addEntity(button1)
 
   
 
