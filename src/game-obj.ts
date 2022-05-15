@@ -57,7 +57,21 @@ export function addLabel(text: string, parent: IEntity) {
   engine.addEntity(label)
 }
 
-
+export class cMuralScene {
+  completionTarget: number = 6
+  completed: number = 0
+  rewardURL = "https://docs.decentraland.org"
+  addCompleted() {
+    this.completed++
+    
+    myUI.puzzleCompletion.increase(0.166);
+    if (this.completionTarget == this.completed) {    
+      
+      myUI.rewardMessage()
+      openExternalURL(this.rewardURL)  
+    }
+  }
+}
 
 export class cPuzzlee extends Entity {
 
@@ -180,7 +194,7 @@ export class cPuzzlee extends Entity {
   }
 
   shufflePuzzle() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 2; i++) {
       this.shuffle(this.tileObjects)
       this.tileObjects.forEach(e => {
         e.tryMove()

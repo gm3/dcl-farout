@@ -1,5 +1,6 @@
 import * as ui from '@dcl/ui-scene-utils'
 
+
 export let puzzleCompletion : ui.UIBar
 
 export function buildUI() {
@@ -26,6 +27,19 @@ export function welcomeMessage(){
   let prompt = new ui.OkPrompt(
     'Hello and welcome to FarOut Mural!\n We\'ve created several Mural Puzzles for you to solve in order to win a prize.',
     () => {
+      log(`accepted`)
+    },
+    'Ok',
+    true
+  )
+}
+
+
+
+export function rewardMessage( ){
+  let prompt = new ui.OkPrompt(
+    'Congratulations on solving all the puzzles!',
+    () => {      
       log(`accepted`)
     },
     'Ok',

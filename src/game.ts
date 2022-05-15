@@ -4,7 +4,7 @@ import Script1 from "../1ab2733f-1782-4521-9eda-6aa8ad684277/src/item"
 import Script2 from "../e7a6c753-ea84-4c8e-bb94-4523407a5d55/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { createCoin } from './coin'
-import { cPuzzlee, createButton } from './game-obj'
+import { cPuzzlee, createButton, cMuralScene } from './game-obj'
 import * as myUI from './ui'
 import { getUserData } from "@decentraland/Identity"
 import Script3 from "../b88efbbf-2a9a-47b4-86e1-e38ecc2b433b/src/item"
@@ -131,6 +131,8 @@ for (const coinPosition of coinPositions) {
 // start mural game code
 
 myUI.buildUI()
+
+let FarOutMural = new cMuralScene
  
 executeTask(async () => {
   //myUI.welcomeMessage();
