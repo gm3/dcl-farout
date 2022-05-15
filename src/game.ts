@@ -185,6 +185,7 @@ let puzzle1 = new cPuzzlee(4,
   "puzzle1",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2) //plate scale
+  FarOutMural
 ); 
 puzzle1.setup()
 
@@ -206,6 +207,7 @@ let puzzle2 = new cPuzzlee(4,
   "puzzle2",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2) //plate scale
+  FarOutMural
 ); 
 puzzle2.setup()
 
@@ -228,6 +230,7 @@ let puzzle3 = new cPuzzlee(4,
   "puzzle3",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2) //plate scale
+  FarOutMural
 ); 
 puzzle3.setup()
 
@@ -247,6 +250,7 @@ let puzzle4 = new cPuzzlee(4,
   "puzzle4",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2) //plate scale
+  FarOutMural
 ); 
 puzzle4.setup()
 
@@ -267,6 +271,7 @@ let puzzle5 = new cPuzzlee(4,
   "puzzle5",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2) //plate scale
+  FarOutMural
 ); 
 puzzle5.setup()
 let btn5 = createButton(
@@ -286,6 +291,7 @@ let puzzle6 = new cPuzzlee(3,
   "puzzle6",
   new Vector3(0, -0.1, -1), //plate position
   new Vector3(.1, 5.5, 4.2), //plate scale
+  FarOutMural,
   1.3 // distance
 ); 
 puzzle6.setup()

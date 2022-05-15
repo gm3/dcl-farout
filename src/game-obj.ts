@@ -57,6 +57,8 @@ export function addLabel(text: string, parent: IEntity) {
   engine.addEntity(label)
 }
 
+
+
 export class cMuralScene {
   completionTarget: number = 6
   completed: number = 0
@@ -95,8 +97,9 @@ export class cPuzzlee extends Entity {
   plateScale: Vector3
   countMove: Boolean = false
   puzzleComplete: Boolean
+  parent: cMuralScene
 
-  constructor(r, c, p, ro, s, folder, pPos, pScale, pDistance?: number) {
+  constructor(r, c, p, ro, s, folder, pPos, pScale, parent: cMuralScene, pDistance?: number,) {
     super()
     this.rows = r
     this.cols = c
@@ -105,6 +108,7 @@ export class cPuzzlee extends Entity {
     this.folder = folder
     this.platePos = pPos
     this.plateScale = pScale
+    this.parent = parent
     if (typeof pDistance !== 'undefined') {
       this.distance = pDistance
     }
@@ -122,7 +126,7 @@ export class cPuzzlee extends Entity {
     //this.addComponentOrReplace(new GLTFShape('models/' + folder + '/BGplate.glb'));
     engine.addEntity(this);
 
-    
+
   }
 
   setup() {
@@ -241,8 +245,9 @@ export class cPuzzlee extends Entity {
     }
     log("isCompleted:" + this.isCompleted())
     if (this.isCompleted()) {
-      myUI.puzzleCompletion.increase(0.166);
+
       this.puzzleComplete = true
+      this.parent.addCompleted()
     }
   }
 
