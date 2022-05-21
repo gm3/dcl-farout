@@ -1,23 +1,20 @@
 import * as ui from '@dcl/ui-scene-utils'
+import * as myUI from '/ui'
 
 
 export let puzzleCompletion : ui.UIBar
+export let canPuzzleCompletion : ui.UIBar
+export let canRewardURL: string = 'https://docs.decentraland.org';
 
 export function buildUI() {
 
   let healthLabel = new ui.CornerLabel('Progress:', -180, 495)
   puzzleCompletion = new ui.UIBar(0, -30, 500, Color4.Green(), ui.BarStyles.ROUNDSILVER, 1)
-  // Create screenspace component
-  // const canvas = new UICanvas()
+ 
 
-  // // Create a textShape component, setting the canvas as parent
-  // const text = new UIText(canvas)
-  // text.value = "Welcome to FarOut Murals!"
-  // text.fontSize = 15
-  // text.width = 120
-  // text.height = 30
-  // //text.vAlign = "bottom"
-  // text.positionY = -5
+  let cansProgress = new ui.CornerLabel('Cans:', -200, 445)
+  canPuzzleCompletion = new ui.UIBar(0, -30, 450, Color4.Green(), ui.BarStyles.ROUNDSILVER, 1)
+
 
 
 }
@@ -45,4 +42,17 @@ export function rewardMessage( ){
     'Ok',
     true
   )
+}
+
+export function canPuzzleRewardMessage( ){
+  let prompt = new ui.OkPrompt(
+    'Congratulations you found all the cans!',
+    () => {      
+      log(`accepted`)
+
+    },
+    'Ok',
+    true
+  )
+  // openExternalURL(this.canRewardURL)
 }

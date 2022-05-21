@@ -1,11 +1,14 @@
 import * as utils from '@dcl/ecs-scene-utils'
+import * as myUI from './ui'
+// import { externalLink } from './game'
 
 /**
  * Sound is a separated from the coin entity so that you can
  * still hear it even when the coin is removed from the engine.
  */
 
- let totalCans: number = 0;
+export let totalCans: number = 0;
+
 const coinPickupSound = new Entity()
 coinPickupSound.addComponent(new Transform())
 engine.addEntity(coinPickupSound)
@@ -33,12 +36,22 @@ export function createCoin(
         entity.getComponent(Transform).scale.setAll(0)
         coinPickupSound.getComponent(AudioSource).playOnce()
         totalCans = totalCans + 1
+        myUI.canPuzzleCompletion.increase(.06);
         console.log(totalCans)
 
         if (totalCans > 16)
         {
         console.log('You won');
+        console.log('Show winPLane');
+        myUI.canPuzzleRewardMessage()
+
+        //externalLink.getComponent(PlaneShape).visible = true;
+        
+
         }
+
+        
+
  
         // Add to total coins picked up
       },
@@ -50,5 +63,7 @@ export function createCoin(
   )
   return entity
 }
+
+
 
 

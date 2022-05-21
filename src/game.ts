@@ -8,6 +8,7 @@ import { cPuzzlee, createButton, cMuralScene } from './game-obj'
 import * as myUI from './ui'
 import { getUserData } from "@decentraland/Identity"
 import Script3 from "../b88efbbf-2a9a-47b4-86e1-e38ecc2b433b/src/item"
+// import { totalCans } from './coin'
 
 const _scene = new Entity('_scene')
 engine.addEntity(_scene)
@@ -17,6 +18,8 @@ const transform = new Transform({
   scale: new Vector3(1, 1, 1)
 })
 _scene.addComponentOrReplace(transform)
+
+
 
 // Praycan Triggle Box area
 const triggerArea = new Entity('triggerArea')
@@ -80,12 +83,7 @@ script2.spawn(messageBubble, {"text":"Find All \nThe Spraycans!","fontSize":18.5
 script1.spawn(triggerArea2, {"enabled":true,"onEnter":[{"entityName":"messageBubble2","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble2","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea2, channelBus))
 script2.spawn(messageBubble2, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble2, channelBus))
 
-// adding coing came logic below
-
-// Adding base scene models
-// const base = new Entity()
-// base.addComponent(new GLTFShape('models/baseLight.glb'))
-// engine.addEntity(base)
+// adding coin came logic below
 
 
 const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Include the spinning animation
@@ -163,16 +161,6 @@ faroutBuilding.addComponent(
 engine.addEntity(faroutBuilding)
 
 
-//  // ground
-// const floor = new Entity()
-// floor.addComponent(new GLTFShape('models/FloorBaseGrass.glb'))
-// floor.addComponent(
-//   new Transform({
-//     position: new Vector3(8, 0, 8),
-//     scale: new Vector3(1.6, 0.1, 1.6)
-//   })
-// )
-// engine.addEntity(floor)
 
 
 
@@ -303,7 +291,7 @@ let btn6 = createButton(
 )
 
 //solar punk link
-const externalLink = new Entity('externalLink')
+export const externalLink = new Entity('externalLink')
 engine.addEntity(externalLink)
 externalLink.setParent(_scene)
 externalLink.addComponent(new Material)
@@ -312,13 +300,17 @@ const transform8 = new Transform({
   position: new Vector3(11.6, 2, 10),
   rotation: new Quaternion(270, 0, 270, 1),
   scale: new Vector3(5 , 5, 1)
+  
 })
 externalLink.addComponentOrReplace(transform8)
+
+
+
 
 const script3 = new Script3()
 script3.spawn(externalLink, {"url":"https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb","name":"SolarPunk Exhibition"}, createChannel(channelId, externalLink, channelBus))
 
 
 
-  
 
+    
