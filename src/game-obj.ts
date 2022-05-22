@@ -43,6 +43,8 @@ function spawnCube(x: number, y: number, z: number) {
   return cube
 }
 
+
+
 // add label to cube
 
 export function addLabel(text: string, parent: IEntity) {
@@ -57,20 +59,83 @@ export function addLabel(text: string, parent: IEntity) {
   engine.addEntity(label)
 }
 
+export class solarPunkLink extends Entity {
 
+  constructor() {
+    super() 
+    this.addComponent(new Material)
+    this.addComponent(new PlaneShape())
+
+    engine.addEntity(this);
+  }
+  hideLink() {
+    const transformHide = new Transform({
+      position: new Vector3(11.6, 2, 10),
+      rotation: new Quaternion(270, 0, 270, 1),
+      scale: new Vector3(0, 0, 0)
+
+    })
+    this.addComponentOrReplace(transformHide)
+  }
+  showLink() {
+    const transformShow = new Transform({
+      position: new Vector3(11.6, 2, 11),
+      rotation: new Quaternion(270, 0, 270, 1),
+      scale: new Vector3(5, 5, 1)
+
+    })
+    this.addComponentOrReplace(transformShow)
+  }
+}
+
+
+export class puzzleRewardLink extends Entity {
+
+  constructor() {
+    super() 
+    this.addComponent(new Material)
+    this.addComponent(new PlaneShape())
+
+    engine.addEntity(this);
+  }
+  hideLink() {
+    const transformHide = new Transform({
+      
+      scale: new Vector3(0, 0, 0)
+
+    })
+    this.addComponentOrReplace(transformHide)
+  }
+  showLink() {
+    const transformShow = new Transform({
+      position: new Vector3(11.6, 2, 5),
+      rotation: new Quaternion(270, 0, 270, 1),
+      scale: new Vector3(5, 5, 1)
+
+    })
+    this.addComponentOrReplace(transformShow)
+  }
+}
 
 export class cMuralScene {
   completionTarget: number = 6
   completed: number = 0
   rewardURL = "https://docs.decentraland.org"
+  puzzleRLink: puzzleRewardLink
+  constructor(puzzleRLink){
+    this.puzzleRLink = puzzleRLink
+  }
+
   addCompleted() {
     this.completed++
-    
+
     myUI.puzzleCompletion.increase(0.166);
-    if (this.completionTarget == this.completed) {    
-      
+    if (this.completionTarget == this.completed) {
+
       myUI.rewardMessage()
-      openExternalURL(this.rewardURL)  
+      this.puzzleRLink.showLink()   
+      //openExternalURL(this.rewardURL)
+      
     }
   }
 }
@@ -101,7 +166,7 @@ export class cPuzzlee extends Entity {
   puzzleComplete: Boolean
   parent: cMuralScene
 
-  constructor(r, c, p, ro, s, folder, pPos, pScale, parent: cMuralScene, pDistance?: number,) {
+  constructor(r, c, p, ro, s, folder, pPos, pScale, parent: cMuralScene, pDistance?: number) {
     super()
     this.rows = r
     this.cols = c

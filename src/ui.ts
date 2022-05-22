@@ -1,10 +1,10 @@
 import * as ui from '@dcl/ui-scene-utils'
-import * as myUI from '/ui'
+ 
 
 
 export let puzzleCompletion : ui.UIBar
 export let canPuzzleCompletion : ui.UIBar
-export let canRewardURL: string = 'https://docs.decentraland.org';
+//export let canRewardURL: string = 'https://docs.decentraland.org';
 
 export function buildUI() {
 

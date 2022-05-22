@@ -1,5 +1,6 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import * as myUI from './ui'
+
 // import { externalLink } from './game'
 
 /**
@@ -21,7 +22,8 @@ engine.addEntity(coinPickupSound)
 export function createCoin(
   model: GLTFShape,
   transform: Transform,
-  triggerShape: utils.TriggerBoxShape
+  triggerShape: utils.TriggerBoxShape,
+  externalLink
 ): Entity {
   const entity = new Entity()
   engine.addEntity(entity)
@@ -37,22 +39,22 @@ export function createCoin(
         coinPickupSound.getComponent(AudioSource).playOnce()
         totalCans = totalCans + 1
         myUI.canPuzzleCompletion.increase(.06);
-        console.log(totalCans)
+        log(totalCans)
 
-        if (totalCans > 16)
-        {
-        console.log('You won');
-        console.log('Show winPLane');
-        myUI.canPuzzleRewardMessage()
+        if (totalCans > 16) {
+          log('You won');
+          log('Show winPLane');
 
-        //externalLink.getComponent(PlaneShape).visible = true;
-        
+          myUI.canPuzzleRewardMessage()
+          externalLink.showLink()
+          //externalLink.getComponent(PlaneShape).visible = true;
+
 
         }
 
-        
 
- 
+
+
         // Add to total coins picked up
       },
       onCameraExit: () => {
@@ -63,6 +65,8 @@ export function createCoin(
   )
   return entity
 }
+
+
 
 
 

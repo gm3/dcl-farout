@@ -4,7 +4,7 @@ import Script1 from "../1ab2733f-1782-4521-9eda-6aa8ad684277/src/item"
 import Script2 from "../e7a6c753-ea84-4c8e-bb94-4523407a5d55/src/item"
 import * as utils from '@dcl/ecs-scene-utils'
 import { createCoin } from './coin'
-import { cPuzzlee, createButton, cMuralScene } from './game-obj'
+import { cPuzzlee, createButton, cMuralScene, solarPunkLink, puzzleRewardLink } from './game-obj'
 import * as myUI from './ui'
 import { getUserData } from "@decentraland/Identity"
 import Script3 from "../b88efbbf-2a9a-47b4-86e1-e38ecc2b433b/src/item"
@@ -25,7 +25,7 @@ _scene.addComponentOrReplace(transform)
 const triggerArea = new Entity('triggerArea')
 engine.addEntity(triggerArea)
 triggerArea.setParent(_scene)
-// triggerArea.addComponent(new BoxShape())
+//triggerArea.addComponent(new BoxShape())
 const transform11 = new Transform({
   position: new Vector3(27, 2, -27),
   rotation: new Quaternion(0, 0, 0, 1),
@@ -50,7 +50,7 @@ messageBubble.addComponentOrReplace(transform12)
 const triggerArea2 = new Entity('triggerArea2')
 engine.addEntity(triggerArea2)
 triggerArea2.setParent(_scene)
-// triggerArea2.addComponent(new BoxShape())
+//triggerArea2.addComponent(new BoxShape())
 const transform13 = new Transform({
   position: new Vector3(22, 2, -3),
   rotation: new Quaternion(0, 0, 0, 1),
@@ -78,14 +78,35 @@ const script1 = new Script1()
 const script2 = new Script2()
 script1.init(options)
 script2.init(options)
-script1.spawn(triggerArea, {"enabled":true,"onEnter":[{"entityName":"messageBubble","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea, channelBus))
-script2.spawn(messageBubble, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble, channelBus))
-script1.spawn(triggerArea2, {"enabled":true,"onEnter":[{"entityName":"messageBubble2","actionId":"open","values":{}}],"onLeave":[{"entityName":"messageBubble2","actionId":"close","values":{}}]}, createChannel(channelId, triggerArea2, channelBus))
-script2.spawn(messageBubble2, {"text":"Find All \nThe Spraycans!","fontSize":18.5}, createChannel(channelId, messageBubble2, channelBus))
+script1.spawn(triggerArea, { "enabled": true, "onEnter": [{ "entityName": "messageBubble", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea, channelBus))
+script2.spawn(messageBubble, { "text": "Find All \nThe Spraycans!", "fontSize": 18.5 }, createChannel(channelId, messageBubble, channelBus))
+script1.spawn(triggerArea2, { "enabled": true, "onEnter": [{ "entityName": "messageBubble2", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble2", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea2, channelBus))
+script2.spawn(messageBubble2, { "text": "Find All \nThe Spraycans!", "fontSize": 18.5 }, createChannel(channelId, messageBubble2, channelBus))
+
+
+
+
+
+//solar punk link
+let externalLink = new solarPunkLink()
+externalLink.setParent(_scene)
+externalLink.hideLink()
+
+const script3 = new Script3()
+script3.spawn(externalLink, { "url": "https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb", "name": "SolarPunk Exhibition" }, createChannel(channelId, externalLink, channelBus))
+
+
+//Puzzle Reward Link
+let puzzleRLink = new puzzleRewardLink()
+puzzleRLink.setParent(_scene)
+puzzleRLink.hideLink()
+
+const sc = new Script3()
+sc.spawn(puzzleRLink, { "url": "https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb", "name": "Puzzle Reward Link[change this]" }, createChannel(channelId, puzzleRLink, channelBus))
+
+
 
 // adding coin came logic below
-
-
 const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Include the spinning animation
 
 
@@ -107,7 +128,7 @@ const coinPositions = [
   new Vector3(16, 1.5, -14),
   new Vector3(16, 1.5, -16),
   new Vector3(16, 1.5, -18),
-  new Vector3(16, 1.5, -20), 
+  new Vector3(16, 1.5, -20),
 ]
 
 const triggerBoxShape = new utils.TriggerBoxShape(
@@ -120,7 +141,8 @@ for (const coinPosition of coinPositions) {
   createCoin(
     coinShape,
     new Transform({ position: coinPosition }),
-    triggerBoxShape
+    triggerBoxShape,
+    externalLink
   )
 }
 
@@ -130,8 +152,8 @@ for (const coinPosition of coinPositions) {
 
 myUI.buildUI()
 
-let FarOutMural = new cMuralScene
- 
+let FarOutMural = new cMuralScene(puzzleRLink)
+
 executeTask(async () => {
   //myUI.welcomeMessage();
   let myPlayer = await getUserData()
@@ -147,7 +169,7 @@ executeTask(async () => {
     // }
   })
 })
-  
+
 
 // farout building main
 const faroutBuilding = new Entity()
@@ -165,16 +187,16 @@ engine.addEntity(faroutBuilding)
 
 
 
-let puzzle1 = new cPuzzlee(4, 
+let puzzle1 = new cPuzzlee(4,
   7,
   new Vector3(10.6, 1.43, -38.76), // position
   Quaternion.Euler(90, 90, 0),//rotation
   new Vector3(0.98, 1, 1.1), // scale
   "puzzle1",
   new Vector3(0, -0.1, -1), //plate position
-  new Vector3(.1, 5.5, 4.2) //plate scale
+  new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural
-); 
+);
 puzzle1.setup()
 
 
@@ -187,91 +209,91 @@ let btn1 = createButton(
 
 
 
-let puzzle2 = new cPuzzlee(4, 
+let puzzle2 = new cPuzzlee(4,
   5,
   new Vector3(10.6, 1.43, -33), // position
   Quaternion.Euler(90, 90, 0),//rotation
   new Vector3(1.1, 1, 1.1), // scale
   "puzzle2",
   new Vector3(0, -0.1, -1), //plate position
-  new Vector3(.1, 5.5, 4.2) //plate scale
+  new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural
-); 
+);
 puzzle2.setup()
 
 let btn2 = createButton(
   new Vector3(13, 0.8, -33),
   new Vector3(1.6, 1, 1.6),
   puzzle2
-) 
+)
 
 
 
 
 
 
-let puzzle3 = new cPuzzlee(4, 
+let puzzle3 = new cPuzzlee(4,
   6,
   new Vector3(12.1, 1.45, -28.98), // position
   Quaternion.Euler(90, 90, 0),//rotation
   new Vector3(.72, 1, .9), // scale
   "puzzle3",
   new Vector3(0, -0.1, -1), //plate position
-  new Vector3(.1, 5.5, 4.2) //plate scale
+  new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural
-); 
+);
 puzzle3.setup()
 
 let btn3 = createButton(
   new Vector3(15.1, 0.6, -28.98),
   new Vector3(1.6, 1, 1.6),
   puzzle3
-) 
+)
 
 
 
-let puzzle4 = new cPuzzlee(4, 
+let puzzle4 = new cPuzzlee(4,
   6,
   new Vector3(12.1, 1.45, -24.75), // position
   Quaternion.Euler(90, 90, 0),//rotation
   new Vector3(0.98, 1, .9), // scale
   "puzzle4",
   new Vector3(0, -0.1, -1), //plate position
-  new Vector3(.1, 5.5, 4.2) //plate scale
+  new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural
-); 
+);
 puzzle4.setup()
 
 let btn4 = createButton(
   new Vector3(15.1, 0.6, -24.75),
   new Vector3(1.6, 1, 1.6),
   puzzle4
-) 
+)
 
 
 
 
-let puzzle5 = new cPuzzlee(4, 
+let puzzle5 = new cPuzzlee(4,
   6,
   new Vector3(12.1, 1.45, -20.2), // position
   Quaternion.Euler(90, 90, 0),//rotation
   new Vector3(.96, 1, .9), // scale
   "puzzle5",
   new Vector3(0, -0.1, -1), //plate position
-  new Vector3(.1, 5.5, 4.2) //plate scale
+  new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural
-); 
+);
 puzzle5.setup()
 let btn5 = createButton(
   new Vector3(15.1, 0.6, -20.2),
   new Vector3(1.6, 1, 1.6),
   puzzle5
-) 
+)
 
 
 
 
-let puzzle6 = new cPuzzlee(3, 
+let puzzle6 = new cPuzzlee(3,
   6,
   new Vector3(12.1, 1.6, -12.5), // position
   Quaternion.Euler(90, 90, 0),//rotation
@@ -281,7 +303,7 @@ let puzzle6 = new cPuzzlee(3,
   new Vector3(.1, 5.5, 4.2), //plate scale
   FarOutMural,
   1.3 // distance
-); 
+);
 puzzle6.setup()
 
 let btn6 = createButton(
@@ -290,27 +312,4 @@ let btn6 = createButton(
   puzzle6
 )
 
-//solar punk link
-export const externalLink = new Entity('externalLink')
-engine.addEntity(externalLink)
-externalLink.setParent(_scene)
-externalLink.addComponent(new Material)
-externalLink.addComponent(new PlaneShape())
-const transform8 = new Transform({
-  position: new Vector3(11.6, 2, 10),
-  rotation: new Quaternion(270, 0, 270, 1),
-  scale: new Vector3(5 , 5, 1)
-  
-})
-externalLink.addComponentOrReplace(transform8)
 
-
-
-
-const script3 = new Script3()
-script3.spawn(externalLink, {"url":"https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb","name":"SolarPunk Exhibition"}, createChannel(channelId, externalLink, channelBus))
-
-
-
-
-    
