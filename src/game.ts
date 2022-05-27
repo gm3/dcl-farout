@@ -79,9 +79,9 @@ const script2 = new Script2()
 script1.init(options)
 script2.init(options)
 script1.spawn(triggerArea, { "enabled": true, "onEnter": [{ "entityName": "messageBubble", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea, channelBus))
-script2.spawn(messageBubble, { "text": "Find All \nThe Spraycans!", "fontSize": 18.5 }, createChannel(channelId, messageBubble, channelBus))
+script2.spawn(messageBubble, { "text": "Find All \nThe Spraycans! \n Get A PoaP!", "fontSize": 18.5 }, createChannel(channelId, messageBubble, channelBus))
 script1.spawn(triggerArea2, { "enabled": true, "onEnter": [{ "entityName": "messageBubble2", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble2", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea2, channelBus))
-script2.spawn(messageBubble2, { "text": "Find All \nThe Spraycans!", "fontSize": 18.5 }, createChannel(channelId, messageBubble2, channelBus))
+script2.spawn(messageBubble2, { "text": "Complete Mural \nPuzzles For \n A PoaP!", "fontSize": 18.5 }, createChannel(channelId, messageBubble2, channelBus))
 
 
 
@@ -107,28 +107,28 @@ sc.spawn(puzzleRLink, { "url": "https://doingud.com/exhibition/solar-punk-exhibi
 
 
 // adding coin came logic below
-const coinShape = new GLTFShape('models/spraycan_fixed.glb') // Include the spinning animation
+const coinShape = new GLTFShape('models/spray_can_Animate_2_upload.glb') // Include the spinning animation
 
 
 // Contains the positions for each can
 const coinPositions = [
-  new Vector3(2.2, 1.5, 0),
-  new Vector3(5.2, 1.5, 0),
-  new Vector3(8, 1.5, 0),
-  new Vector3(10, 1.5, 0),
-  new Vector3(12, 1.5, 0),
-  new Vector3(14, 1.5, 0),
-  new Vector3(16, 1.5, 0),
-  new Vector3(16, 1.5, -2),
-  new Vector3(16, 1.5, -4),
-  new Vector3(16, 1.5, -6),
-  new Vector3(16, 1.5, -8),
-  new Vector3(16, 1.5, -10),
-  new Vector3(16, 1.5, -12),
-  new Vector3(16, 1.5, -14),
-  new Vector3(16, 1.5, -16),
-  new Vector3(16, 1.5, -18),
-  new Vector3(16, 1.5, -20),
+  new Vector3(2.2, 10, -2.5),
+  new Vector3(13, 10, 3),
+  new Vector3(14, 10, -4),
+  new Vector3(24, 7, 7),
+  new Vector3(12.5, 10, 13),
+  new Vector3(14, 10, -19),
+  new Vector3(25, 18, -11.5),
+  new Vector3(8, 7, -11),
+  new Vector3(8, 7, -20),
+  new Vector3(12, 10, -40),
+  new Vector3(29, 6.8, -33),
+  new Vector3(29, 1.5, -26),
+  new Vector3(18, 1.5, -32),
+  new Vector3(23, 1.5, -1.4),
+  new Vector3(25, 7, -10),
+  new Vector3(19, 1.5, -12.8),
+  new Vector3(25, 8, -22),
 ]
 
 const triggerBoxShape = new utils.TriggerBoxShape(
@@ -173,7 +173,7 @@ executeTask(async () => {
 
 // farout building main
 const faroutBuilding = new Entity()
-faroutBuilding.addComponent(new GLTFShape('models/FAROUTtest4.glb'))
+faroutBuilding.addComponent(new GLTFShape('models/FAROUT_test6_merged_fixednormals.glb'))
 faroutBuilding.addComponent(
   new Transform({
     position: new Vector3(16.3, 0, -15.3),

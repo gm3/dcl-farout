@@ -61,11 +61,14 @@ export function addLabel(text: string, parent: IEntity) {
 
 export class solarPunkLink extends Entity {
 
+  const winTexture1 = new Texture("tex/farout.png")
+  const winTexture2 = new Texture("tex/farout2.png")
+  
   constructor() {
     super() 
     this.addComponent(new Material)
     this.addComponent(new PlaneShape())
-
+   
     engine.addEntity(this);
   }
   hideLink() {
@@ -96,7 +99,7 @@ export class puzzleRewardLink extends Entity {
     this.addComponent(new Material)
     this.addComponent(new PlaneShape())
 
-    engine.addEntity(this);
+    engine.addEntity(this); // test
   }
   hideLink() {
     const transformHide = new Transform({
