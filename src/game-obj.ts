@@ -66,9 +66,12 @@ export class solarPunkLink extends Entity {
   
   constructor() {
     super() 
-    this.addComponent(new Material)
+    // create a material
+    const winMaterial = new Material()
+    winMaterial.albedoTexture = this.winTexture1
+    this.addComponent(winMaterial)
     this.addComponent(new PlaneShape())
-   
+    
     engine.addEntity(this);
   }
   hideLink() {
@@ -84,7 +87,7 @@ export class solarPunkLink extends Entity {
     const transformShow = new Transform({
       position: new Vector3(11.6, 2, 11),
       rotation: new Quaternion(270, 0, 270, 1),
-      scale: new Vector3(5, 5, 1)
+      scale: new Vector3(5, 5, -1)
 
     })
     this.addComponentOrReplace(transformShow)
