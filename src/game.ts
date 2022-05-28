@@ -185,7 +185,7 @@ externalLink.setParent(_scene)
 externalLink.hideLink()
 
 const script3 = new Script3()
-script3.spawn(externalLink, { "url": "https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb", "name": "SolarPunk Exhibition" }, createChannel(channelId, externalLink, channelBus))
+script3.spawn(externalLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You found the cans!! Claim Your Poap!" }, createChannel(channelId, externalLink, channelBus))
 
 
 //Puzzle Reward Link
@@ -194,7 +194,7 @@ puzzleRLink.setParent(_scene)
 puzzleRLink.hideLink()
 
 const sc = new Script3()
-sc.spawn(puzzleRLink, { "url": "https://doingud.com/exhibition/solar-punk-exhibition-b26efbd6-c1b5-4572-9763-b6a4292dbfdb", "name": "Puzzle Reward Link[change this]" }, createChannel(channelId, puzzleRLink, channelBus))
+sc.spawn(puzzleRLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You Solved The Puzzle! Claim Your Poap!" }, createChannel(channelId, puzzleRLink, channelBus))
 
 
 
@@ -265,7 +265,7 @@ executeTask(async () => {
 
 // farout building main
 const faroutBuilding = new Entity()
-faroutBuilding.addComponent(new GLTFShape('models/FAROUT_test6_merged_fixednormals.glb'))
+faroutBuilding.addComponent(new GLTFShape('models/FAROUT_test6_merged_fixednormals3.glb'))
 faroutBuilding.addComponent(
   new Transform({
     position: new Vector3(16.3, 0, -15.3),
