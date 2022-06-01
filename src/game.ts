@@ -171,7 +171,7 @@ const script2 = new Script2()
 script1.init(options)
 script2.init(options)
 script1.spawn(triggerArea, { "enabled": true, "onEnter": [{ "entityName": "messageBubble", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea, channelBus))
-script2.spawn(messageBubble, { "text": "Find All \nThe Spraycans! \n Get A PoaP!", "fontSize": 18.5 }, createChannel(channelId, messageBubble, channelBus))
+script2.spawn(messageBubble, { "text": "Find All \nThe Spraycans! \n Climb The \n Ladder!", "fontSize": 18.5 }, createChannel(channelId, messageBubble, channelBus))
 script1.spawn(triggerArea2, { "enabled": true, "onEnter": [{ "entityName": "messageBubble2", "actionId": "open", "values": {} }], "onLeave": [{ "entityName": "messageBubble2", "actionId": "close", "values": {} }] }, createChannel(channelId, triggerArea2, channelBus))
 script2.spawn(messageBubble2, { "text": "Complete Mural \nPuzzles For \n A PoaP!", "fontSize": 18.5 }, createChannel(channelId, messageBubble2, channelBus))
 
@@ -185,7 +185,7 @@ externalLink.setParent(_scene)
 externalLink.hideLink()
 
 const script3 = new Script3()
-script3.spawn(externalLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You found the cans!! Claim Your Poap!" }, createChannel(channelId, externalLink, channelBus))
+script3.spawn(externalLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You found the cans!! Claim Your Poap In The Alley!" }, createChannel(channelId, externalLink, channelBus))
 
 
 //Puzzle Reward Link
@@ -194,7 +194,7 @@ puzzleRLink.setParent(_scene)
 puzzleRLink.hideLink()
 
 const sc = new Script3()
-sc.spawn(puzzleRLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You Solved The Puzzle! Claim Your Poap!" }, createChannel(channelId, puzzleRLink, channelBus))
+sc.spawn(puzzleRLink, { "url": "https://forms.gle/JSHS2GtzYbL5KXi79", "name": "You Solved The Puzzle! Claim Your Poap In The Alley!" }, createChannel(channelId, puzzleRLink, channelBus))
 
 
 

@@ -271,7 +271,7 @@ export class cPuzzlee extends Entity {
   }
 
   shufflePuzzle() {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 8; i++) {
       this.shuffle(this.tileObjects)
       this.tileObjects.forEach(e => {
         e.tryMove()
