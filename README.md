@@ -1,10 +1,13 @@
 # FarOut Mural Festival
 ![](https://i.imgur.com/KbYE8om.png)
+![](https://i.imgur.com/KRXrziF.jpg)
 
 
 ## Summary
 
-IRLArt and FarOut Murals festaval have joined together to create a metaverse expierence for there yearly event in Decentraland!
+IRLArt and FarOut Murals festaval have joined together to create a metaverse expierence for there yearly event in Decentraland! The parcel featured a puzzle game and a spray paint collection game for a PoaP!
+
+![](https://i.imgur.com/NjtWpbx.jpg)
 
 ## Team 
 IRLArt is a collective of artists and art directors focused on high impact creative projects. We recreate all of our physical exhibits in the metaverse. We have built in Cryptovoxels, Somnium Space, VRChat, Mona.Gallery, scanned our spaces with Matterport, and are committed to bridging digital to physical. We have a physical gallery and venue, IRL Underground, based in Denver, CO we host DAO supported NFT exhibits in. Since 2019 we have also been the art stewards of ETHDenver, managing the Art Gallery and Auction build and curation.
